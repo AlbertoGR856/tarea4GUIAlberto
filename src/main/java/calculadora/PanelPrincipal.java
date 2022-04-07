@@ -9,6 +9,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -23,7 +25,7 @@ al menos se puedan realizar las operaciones aritméticas básicas con dos operan
 Usa control de versiones en un repositorio público.
 Sube el archivo en formato ZIP y el enlace de github.
  */
-public class PanelPrincipal extends JPanel implements ActionListener{
+public class PanelPrincipal extends JPanel implements ActionListener {
 
     // Atributos de la clase (privados)
     private PanelBotones botonera;
@@ -34,6 +36,34 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     public PanelPrincipal() {
         initComponents();
         tipoOperacion = -1; // No hay operaciones en la calculadora
+        
+      botonera.addMouseListener(new MouseListener() {
+              //Se quitan los throw new para que no salten las excepciónes
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent arg0) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent arg0) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent arg0) {
+                arg0.getComponent().setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+                arg0.getComponent().setBackground(Color.WHITE);
+            }
+        });
     }
 
     // Se inicializan los componentes gráficos y se colocan en el panel
@@ -50,18 +80,26 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         // Colocamos la botonera y el área texto
         this.add(areaTexto, BorderLayout.NORTH);
         this.add(botonera, BorderLayout.SOUTH);
-        
+
         //Se recorre con un foreach la botonera creada en la clase PanelBotones
         for (JButton boton : this.botonera.getgrupoBotones()) {
             //Se añade al objeto JButton el controlador del evento ActionListener 
-            boton.addActionListener((ActionListener) this);
+           boton.addActionListener(this);
         }
 
     }
 
     @Override
-    public void actionPerformed(ActionEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent ae) {
+        // Se obtiene el objeto que desencadena el evento
+        Object o = ae.getSource();
+        // Si Object es un botón
+        if (o instanceof JButton) {
+            System.out.println(((JButton) o).getText());
+            areaTexto.setText(((JButton) o).getText());
+        }
+        
+
     }
 
 }
