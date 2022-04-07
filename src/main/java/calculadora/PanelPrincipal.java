@@ -7,6 +7,9 @@ package calculadora;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -20,7 +23,7 @@ al menos se puedan realizar las operaciones aritméticas básicas con dos operan
 Usa control de versiones en un repositorio público.
 Sube el archivo en formato ZIP y el enlace de github.
  */
-public class PanelPrincipal extends JPanel {
+public class PanelPrincipal extends JPanel implements ActionListener{
 
     // Atributos de la clase (privados)
     private PanelBotones botonera;
@@ -47,7 +50,18 @@ public class PanelPrincipal extends JPanel {
         // Colocamos la botonera y el área texto
         this.add(areaTexto, BorderLayout.NORTH);
         this.add(botonera, BorderLayout.SOUTH);
+        
+        //Se recorre con un foreach la botonera creada en la clase PanelBotones
+        for (JButton boton : this.botonera.getgrupoBotones()) {
+            //Se añade al objeto JButton el controlador del evento ActionListener 
+            boton.addActionListener((ActionListener) this);
+        }
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
