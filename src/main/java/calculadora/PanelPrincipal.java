@@ -9,8 +9,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -148,6 +146,45 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                     System.out.println("Operador 2: " + operador2);
                 }
 
+            }
+
+            // Si operador2 no está vacío y el simbolo es el de resultado (=)
+            if (!operador2.isEmpty() && simbolo.equals("=")) {
+                // Haremos un switch teniendo en cuenta que simbolo tiene la variable simboloAux
+                switch (simboloAux) {
+                    //Se realizaran en cada case las distintas operaciones basicas entre los dos operadores
+                    //suma
+                    case "+":
+                        //Se hace una conversi´ón utilizando clases envolventes para los dos operadores
+                        tipoOperacion = Integer.parseInt(operador1) + Integer.parseInt(operador2);
+                        break;
+                    //resta
+                    case "-":
+                        tipoOperacion = Integer.parseInt(operador1) - Integer.parseInt(operador2);
+                        break;
+                    //multiplicación
+                    case "*":
+                        tipoOperacion = Integer.parseInt(operador1) * Integer.parseInt(operador2);
+                        break;
+                    //división
+                    case "/":
+                        tipoOperacionDecimales = Double.parseDouble(operador1) / Double.parseDouble(operador2);
+                        break;
+
+                    //Por defecto, el tipo de operacion sera un =. Ya que el simboloAux tendra dicho simbolo
+                    default:
+                        tipoOperacion = Integer.parseInt(operador1);
+                        break;
+                }
+
+                //Se eliminan todo los operadores y simbolos para poder ealziar otra operacion
+                operador1 = "";
+                simbolo = "";
+                operador2 = "";
+                tipoOperacionDecimales = 0;
+                tipoOperacion = 0;
+                //Llamo al metodo deshabilitarBotones()
+                botonera.deshabilitarBotones();
             }
 
         }
