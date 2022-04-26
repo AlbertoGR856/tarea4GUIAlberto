@@ -96,26 +96,26 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                     // Se eliminara todo lo que se haya escrito en la calucladora
                     operador1 = "";
                     simbolo = "";
-                     operador2 = "";
+                    operador2 = "";
                     tipoOperacion = 0;
                     tipoOperacionDecimales = 0;
                     //El areaTexto establecera la operacion1 que estara ya eliminada
-                    areaTexto.setText( operador1);
+                    areaTexto.setText(operador1);
                     //Si el boton es igual a - (resta) y la operacio1 no tiene valor entrara
-                } else if (((JButton) o).getText().equals("-") &&  operador1.isEmpty()) {
+                } else if (((JButton) o).getText().equals("-") && operador1.isEmpty()) {
                     // Se Guardará el primer operador
                     operador1 += ((JButton) o).getText();
                     //Se establecera en el textArea
-                    areaTexto.setText( operador1);
+                    areaTexto.setText(operador1);
                     //Se muestra el operador1
-                    System.out.println("Operador 1: " +  operador1);
+                    System.out.println("Operador 1: " + operador1);
 
                     //En el caso contrario, solo guardará la información del simbolos
                 } else {
                     // Se Guardará el simbolo
                     simbolo = ((JButton) o).getText();
                     //Se establece en el textArea el operador1 y el simbolo
-                    areaTexto.setText( operador1 + simbolo);
+                    areaTexto.setText(operador1 + simbolo);
                     //Se muestra por consola
                     System.out.println("Simbolo: " + simbolo);
                     // Si el simbolo no es el de resultado (=)
@@ -123,6 +123,29 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                         //Se guardara en la variable simboloAux
                         simboloAux = simbolo;
                     }
+
+                }
+
+                //Si los botones representan numeros
+            } else {
+                //Si la varible esimbolo esta vacia entra
+                if (simbolo.isEmpty()) {
+                    // Guardará el primer operador
+                    operador1 += ((JButton) o).getText();
+                    //Se establece en el textArea el operador1
+                    areaTexto.setText(operador1);
+                    //Se muestra por consola
+                    System.out.println("Operador 1: " + operador1);
+                    //Se llama al metodo habilitarBotones() de la clase PanelBotones para habilitar los botones +, *, / y  =
+                    botonera.habilitarBotones();
+                    // Si el simbolo contiene algo, se pasara al operador2
+                } else {
+                    // Guardará el segundo operador
+                    operador2 += ((JButton) o).getText();
+                    //Se establece en el textArea el operador1, el simboloAux y el operador2
+                    areaTexto.setText(operador1 + simboloAux + operador2);
+                    //Se muestra por consola
+                    System.out.println("Operador 2: " + operador2);
                 }
 
             }
