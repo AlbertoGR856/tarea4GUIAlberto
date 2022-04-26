@@ -68,7 +68,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             boton.addActionListener(this);
         }
 
-        //Se llama al metodo deshabilitarBotones de la clase PanelBotones para deshabilitar los botones al principio
+        //Llamo al metodo deshabilitarBotones() para no poder poner simbolos al principio antes de poner un operador
         botonera.deshabilitarBotones();
     }
 
@@ -99,8 +99,8 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                     tipoOperacionDecimales = 0;
                     //El areaTexto establecera la operacion1 que estara ya eliminada
                     areaTexto.setText(operador1);
-                    //Si el boton es igual a - (resta) y la operacio1 no tiene valor entrara
-                } else if (((JButton) o).getText().equals("-") && operador1.isEmpty()) {
+                    //Si el boton es igual a + (suma) y la operacio1 no tiene valor entrara
+                } else if (((JButton) o).getText().equals("+") && operador1.isEmpty()) {
                     // Se Guardará el primer operador
                     operador1 += ((JButton) o).getText();
                     //Se establecera en el textArea
@@ -166,7 +166,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                     case "*":
                         tipoOperacion = Integer.parseInt(operador1) * Integer.parseInt(operador2);
                         break;
-                    //división
+                    //división, utilizando la variable con decimales tipoOperacionDecimales
                     case "/":
                         tipoOperacionDecimales = Double.parseDouble(operador1) / Double.parseDouble(operador2);
                         break;
@@ -177,13 +177,33 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                         break;
                 }
 
-                //Se eliminan todo los operadores y simbolos para poder ealziar otra operacion
+                //Se realiza ahora una estructura if-else if para determinar si el resultado es con o sin decimales
+                // Si tipoOperacionDecimales es mayor a 0 que es su valor por defecto
+                if (tipoOperacionDecimales > 0) {
+                    // Imprimirá su número con decimales
+                    System.out.println("Resultado: " + tipoOperacionDecimales);
+                    //Se establecera el resultado en el textArea
+                    areaTexto.setText(tipoOperacionDecimales + "");
+                    //Si tipoOperacionDecimales  es igual a 0 se mostrara el resultado sin decimales
+                } else if ((tipoOperacion >= 0 || tipoOperacion <= 0) && tipoOperacionDecimales == 0) {
+                    // Imprimirá el numero sin decimales
+                    System.out.println("Resultado: " + tipoOperacion);
+                    //Se establecera el resultado en el textArea
+                    areaTexto.setText(tipoOperacion + "");
+
+                    // Si en el caso de que se haga una division y esta de por resultado un valor negativo (menor que 0) se avisara con un mensaje
+                } else {
+                    areaTexto.setText("SYNTAX ERROR: Resultado de la división da un numero negativo");
+                    System.out.println("SYNTAX ERROR: Resultado de la división da un numero negativo");
+                }
+
+                //Se eliminan todo los operadores y simbolos para poder realizar otra operacion
                 operador1 = "";
                 simbolo = "";
                 operador2 = "";
                 tipoOperacionDecimales = 0;
                 tipoOperacion = 0;
-                //Llamo al metodo deshabilitarBotones()
+                //Llamo al metodo deshabilitarBotones() para no poder poner simbolos al principio antes de poner un operador
                 botonera.deshabilitarBotones();
             }
 
