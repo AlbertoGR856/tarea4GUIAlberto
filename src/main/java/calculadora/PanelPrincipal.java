@@ -24,6 +24,10 @@ En un nuevo proyecto, llamado tarea4GUI+tunombre y usando el ejemplo de la calcu
 al menos se puedan realizar las operaciones aritméticas básicas con dos operandos.
 Usa control de versiones en un repositorio público.
 Sube el archivo en formato ZIP y el enlace de github.
+
+https://github.com/francho/francho.org-lab/tree/master/0045-CalculadoraJavaGrafica
+https://byspel.com/crear-una-calculadora-en-java-con-netbeans-interfaz-grafica/
+https://javadesdecero.es/codigos/calculadora-codigo-fuente/
  */
 public class PanelPrincipal extends JPanel implements ActionListener {
 
@@ -36,34 +40,8 @@ public class PanelPrincipal extends JPanel implements ActionListener {
     public PanelPrincipal() {
         initComponents();
         tipoOperacion = -1; // No hay operaciones en la calculadora
-        
-      botonera.addMouseListener(new MouseListener() {
-              //Se quitan los throw new para que no salten las excepciónes
-            @Override
-            public void mouseClicked(MouseEvent arg0) {
 
-            }
-
-            @Override
-            public void mousePressed(MouseEvent arg0) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent arg0) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent arg0) {
-                arg0.getComponent().setBackground(Color.LIGHT_GRAY);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent arg0) {
-                arg0.getComponent().setBackground(Color.WHITE);
-            }
-        });
+    
     }
 
     // Se inicializan los componentes gráficos y se colocan en el panel
@@ -84,7 +62,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         //Se recorre con un foreach la botonera creada en la clase PanelBotones
         for (JButton boton : this.botonera.getgrupoBotones()) {
             //Se añade al objeto JButton el controlador del evento ActionListener 
-           boton.addActionListener(this);
+            boton.addActionListener(this);
         }
 
     }
@@ -98,7 +76,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             System.out.println(((JButton) o).getText());
             areaTexto.setText(((JButton) o).getText());
         }
-        
+
 
     }
 

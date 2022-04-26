@@ -48,4 +48,19 @@ public class PanelBotones extends JPanel {
         return grupoBotones;
     }
 
+    //Metodo para deshabilitar los botones +, *, / y  =
+    public void deshabilitarBotones() {
+        grupoBotones[10].setEnabled(false);
+        grupoBotones[12].setEnabled(false);
+        grupoBotones[13].setEnabled(false);
+        grupoBotones[14].setEnabled(false);
+    }
+
+    // Metodo para habilitat los botones +, *, / y  =
+    public void habilitarBotones() {
+        grupoBotones[10].setEnabled(true);
+        grupoBotones[12].setEnabled(true);
+        grupoBotones[13].setEnabled(true);
+        grupoBotones[14].setEnabled(true);
+    }
 }
