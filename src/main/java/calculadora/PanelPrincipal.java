@@ -30,14 +30,23 @@ public class PanelPrincipal extends JPanel implements ActionListener {
     // Atributos de la clase (privados)
     private PanelBotones botonera;
     private JTextArea areaTexto;
+
+    //Variables para almacenar el tipo de operacion, tanto con o sin decimales
     private int tipoOperacion;
+    private static double tipoOperacionDecimales = 0;
+
+    //Variables que almacenaran cada parte de la operacion, se incializaran vacias
+    //Ejemlo: (operacion1 = numero ) (simbolo o simboloAux = +)  (operacion2 = numero)
+    private static String operador1 = "";
+    private static String simbolo = "";
+    private static String simboloAux = "";
+    private static String operador2 = "";
 
     // Constructor
     public PanelPrincipal() {
         initComponents();
         tipoOperacion = -1; // No hay operaciones en la calculadora
 
-    
     }
 
     // Se inicializan los componentes gráficos y se colocan en el panel
@@ -61,6 +70,8 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             boton.addActionListener(this);
         }
 
+        //Se llama al metodo deshabilitarBotones de la clase PanelBotones para deshabilitar los botones al principio
+        botonera.deshabilitarBotones();
     }
 
     @Override
@@ -71,8 +82,52 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         if (o instanceof JButton) {
             System.out.println(((JButton) o).getText());
             areaTexto.setText(((JButton) o).getText());
-        }
 
+            //Si los botones son uno de los simbolos, suma, resta, multiplicacion, division, limpiar y resultado
+            if (((JButton) o).getText().equals("+")
+                    || ((JButton) o).getText().equals("-")
+                    || ((JButton) o).getText().equals("/")
+                    || ((JButton) o).getText().equals("*")
+                    || ((JButton) o).getText().equals("C")
+                    || ((JButton) o).getText().equals("=")) {
+
+                // Si el boton es limpirar (C)
+                if (((JButton) o).getText().equals("C")) {
+                    // Se eliminara todo lo que se haya escrito en la calucladora
+                    operador1 = "";
+                    simbolo = "";
+                     operador2 = "";
+                    tipoOperacion = 0;
+                    tipoOperacionDecimales = 0;
+                    //El areaTexto establecera la operacion1 que estara ya eliminada
+                    areaTexto.setText( operador1);
+                    //Si el boton es igual a - (resta) y la operacio1 no tiene valor entrara
+                } else if (((JButton) o).getText().equals("-") &&  operador1.isEmpty()) {
+                    // Se Guardará el primer operador
+                    operador1 += ((JButton) o).getText();
+                    //Se establecera en el textArea
+                    areaTexto.setText( operador1);
+                    //Se muestra el operador1
+                    System.out.println("Operador 1: " +  operador1);
+
+                    //En el caso contrario, solo guardará la información del simbolos
+                } else {
+                    // Se Guardará el simbolo
+                    simbolo = ((JButton) o).getText();
+                    //Se establece en el textArea el operador1 y el simbolo
+                    areaTexto.setText( operador1 + simbolo);
+                    //Se muestra por consola
+                    System.out.println("Simbolo: " + simbolo);
+                    // Si el simbolo no es el de resultado (=)
+                    if (!simbolo.equals("=")) {
+                        //Se guardara en la variable simboloAux
+                        simboloAux = simbolo;
+                    }
+                }
+
+            }
+
+        }
 
     }
 
