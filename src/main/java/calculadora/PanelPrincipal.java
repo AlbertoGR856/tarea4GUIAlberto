@@ -24,10 +24,6 @@ En un nuevo proyecto, llamado tarea4GUI+tunombre y usando el ejemplo de la calcu
 al menos se puedan realizar las operaciones aritméticas básicas con dos operandos.
 Usa control de versiones en un repositorio público.
 Sube el archivo en formato ZIP y el enlace de github.
-
-https://github.com/francho/francho.org-lab/tree/master/0045-CalculadoraJavaGrafica
-https://byspel.com/crear-una-calculadora-en-java-con-netbeans-interfaz-grafica/
-https://javadesdecero.es/codigos/calculadora-codigo-fuente/
  */
 public class PanelPrincipal extends JPanel implements ActionListener {
 
