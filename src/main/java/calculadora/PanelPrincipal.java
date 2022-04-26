@@ -99,8 +99,8 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                     tipoOperacionDecimales = 0;
                     //El areaTexto establecera la operacion1 que estara ya eliminada
                     areaTexto.setText(operador1);
-                    //Si el boton es igual a + (suma) y la operacio1 no tiene valor entrara
-                } else if (((JButton) o).getText().equals("+") && operador1.isEmpty()) {
+                    //Si el boton es igual a - (numero negativo) y la operacio1 no tiene valor entrara
+                } else if (((JButton) o).getText().equals("-") && operador1.isEmpty()) {
                     // Se Guardará el primer operador
                     operador1 += ((JButton) o).getText();
                     //Se establecera en el textArea
@@ -191,7 +191,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                     //Se establecera el resultado en el textArea
                     areaTexto.setText(tipoOperacion + "");
 
-                    // Si en el caso de que se haga una division y esta de por resultado un valor negativo (menor que 0) se avisara con un mensaje
+                 // Si en el caso de que se haga una division y esta de por resultado un valor negativo (menor que 0) se avisara por consola
                 } else {
                     areaTexto.setText("SYNTAX ERROR: Resultado de la división da un numero negativo");
                     System.out.println("SYNTAX ERROR: Resultado de la división da un numero negativo");
